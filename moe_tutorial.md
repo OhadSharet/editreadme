@@ -26,7 +26,9 @@ from eckity.multi_objective_evolution.crowding_termination_checker import Crowdi
 Now we can create our experiment.
 
 ## expirament goal
-in the following expirament we will try to minimize the following objective 
+in the following expirament we will try to minimize the following objective:
+![image](https://user-images.githubusercontent.com/63184030/221291930-46eaa855-878d-4d93-a0ab-5ba797680301.png)
+
 
 
 ### Initializing the multi-objective evolutionary algorithm
