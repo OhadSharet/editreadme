@@ -74,7 +74,7 @@ Sub-population is the object that holds the individuals, and the objects that ar
 
 ### Creating individuals
 
-We have chosen to use bit vectors with a length equal to the number of entries we want to fill. We chose our population to contain 300 individuals.
+We have chosen to use a float vector of size 3 such that each one of its coordinates is in the range bertween -4 and 4  
 
 ```python
 algo = NSGA2Evolution(
@@ -87,10 +87,10 @@ algo = NSGA2Evolution(
 Next we set the parameters for evaluating the individuals. We will elaborate on this later on.
 
 ```python
-                      # user-defined fitness evaluation method
-                      evaluator=OneMaxEvaluator(),
-                      # maximization problem (fitness is sum of values), so higher fitness is better
-                      higher_is_better=True,
+		# user-defined fitness evaluation method
+		evaluator=NSGA2BasicTestEvaluator(),
+		# maximization problem (fitness is sum of values), so higher fitness is better
+		higher_is_better=False,
 ```
 
 ### Breeding process
