@@ -26,7 +26,8 @@ from eckity.multi_objective_evolution.crowding_termination_checker import Crowdi
 Now we can create our experiment.
 
 ## expirament goal
-in the following expirament we will try to 
+in the following expirament we will try to minimize the following objective 
+
 
 ### Initializing the multi-objective evolutionary algorithm
 
@@ -73,9 +74,9 @@ Sub-population is the object that holds the individuals, and the objects that ar
 We have chosen to use bit vectors with a length equal to the number of entries we want to fill. We chose our population to contain 300 individuals.
 
 ```python
-algo = SimpleEvolution(
-        Subpopulation(creators=GABitStringVectorCreator(length=100),
-                      population_size=300,
+algo = NSGA2Evolution(
+	Population([Subpopulation(
+		creators=GAVectorCreator(length=3, bounds=(-4, 4), fitness_type=NSGA2Fitness, vector_type=FloatVector),
 ```
 
 ### Evaluating individuals
