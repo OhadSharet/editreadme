@@ -28,6 +28,7 @@ Now we can create our experiment.
 ## expirament goal
 in the following expirament we will try to minimize the following objective:
 ![image](https://user-images.githubusercontent.com/63184030/221292171-7e41d3b3-1798-455e-baba-aef995a72124.png)
+![image](https://user-images.githubusercontent.com/62753120/163422945-d433b195-9443-4797-90fb-665e181bec80.png)
 
 
 
