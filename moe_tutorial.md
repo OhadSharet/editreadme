@@ -74,7 +74,8 @@ Sub-population is the object that holds the individuals, and the objects that ar
 
 ### Creating individuals
 
-We have chosen to use a float vector of size 3 such that each one of its coordinates is in the range bertween -4 and 4  
+We have chosen to use a float vector of size 3 such that each one of its coordinates is in the range bertween -4 and 4
+and since we want our algorithm to be multi-objective we are using NSGA2Fitness
 
 ```python
 algo = NSGA2Evolution(
@@ -95,25 +96,26 @@ Next we set the parameters for evaluating the individuals. We will elaborate on 
 
 ### Breeding process
 
-Now we will set the (hyper)parameters for the breeding process. We declared that one of the individuals will be considered as elite (and pass to the next generation without a change).
+Now we will set the (hyper)parameters for the breeding process.
 
 Then, we defined the genetic operators to be applied in each generation:
 
--   1 Point Crossover with a probability of 50%
--   Bit Flip Mutation with a probability of 20%, and on every entry of a chosen individual we flip the bit with a probability of 5% (probabilities don't sum to 1 since operators are simply applied sequentially, in a pipeline manner)
+-   1 Point Crossover with a probability of 70%
+-   uniform  point Mutation with a probability of 30%, there is 30% chance for each individual that we will randomly pick 1 of its coordinates and change it to another float number in range (-4 to 4 in that case)
 -   Tournament Selection with a probability of 1 and with tournament size of 3
 
 ```python
-                      elitism_rate=1/300,
-                      # genetic operators sequence to be applied in each generation
-                      operators_sequence=[
-                          VectorKPointsCrossover(probability=0.5, k=1),
-                          BitStringVectorNFlipMutation(probability=0.2, probability_for_each=0.05, n=100)
-                      ],
-                      selection_methods=[
-                          # (selection method, selection probability) tuple
-                          (TournamentSelection(tournament_size=3, higher_is_better=True), 1)
-                      ]),
+	elitism_rate=0,
+		# genetic operators sequence to be applied in each generation
+		operators_sequence=[
+			VectorKPointsCrossover(probability=0.7, k=1),
+			FloatVectorUniformNPointMutation(probability=0.3, n=3)  # maybe chnge mutation
+		],
+		selection_methods=[
+			# (selection method, selection probability) tuple
+			(TournamentSelection(tournament_size=3, higher_is_better=True), 1)
+		]
+	)])
 ```
 
 Now that we are done with our Subpopulation, we will finish setting the evolutionary algorithm.
