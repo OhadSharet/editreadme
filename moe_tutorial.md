@@ -129,25 +129,14 @@ We define our breeder to be the standard NSGA2 Breeder , and our max number of w
 
 ### Termination condition and statistics
 
-We define max number of generations (iterations). We define a `TerminationChecker` (early termination mechanism) to be with a Threshold of 0 from 100 (which means fitness 100 - optimal fitness for our problem)
+We define the max number of generations (iterations). We define a `termination_checker` (early termination mechanism) to be with a crowding Threshold- a number that indicates the largest distance two adjacent individuals fitnesses have between them
 
 ```python
-        termination_checker=ThresholdFromTargetTerminationChecker(optimal=100, threshold=0),
-        statistics=BestAverageWorstStatistics()
-    )
+		max_generation=150,
+		termination_checker=CrowdingTerminationChecker(0.01),
+		statistics=MinimalPrintStatistics()
 ```
 
-Finally, we set our statistics to be the default form of best-average-worst statistics which prints the next format in each generation of the evolutionary run:
-
-```
-generation #(generation number)
-subpopulation #(subpopulation number)
-best fitness (some fitness which is the best)
-worst fitness (some fitness which is average)
-average fitness (some fitness which is just the worst)
-```
-
-Another possible keyword argument to the program is a seed value. This enables to replicate results across different runs with the same parameters.
 
 ## Evolution stage
 
@@ -167,24 +156,27 @@ After the evolve stage has finished (by exceeding the maximal number of generati
     print(algo.execute())
 ```
 
-## The one Max Evaluator
-
 ## What is an Evaluator?
 
 Problem-specific fitness evaluation method.
 
 For each problem we need to supply a mechanism to compute an individual's fitness score, which determines how "good" (fit) this particular individual is.
 
-Let's go through the parts of the one max problem Evaluator:
+Let's go through the parts of the NSGA2 basic test evaluator evaluator:
 
 Simple version evaluator (SimpleIndividualEvaluator) sub-classes compute fitness scores of each individual separately, while more complex Individual Evaluators may compute the fitness of several individuals at once.
 
+when we write an evaluator for a muli objective problem we need it toreturn a list of fitnesses
+
 ## Defining the One Max Evaluator
 
-Our evaluator extends the SimpleIndividualEvaluator class, thus computing each individual's fitness separately. This evaluator summs the values if the vector.
+Our evaluator extends the SimpleIndividualEvaluator class, thus computing each individual's fitness separately. returns a list of two fitnesses each one calculated according to the objective at the beginning of the tutorial 
 
 ```python
-class OneMaxEvaluator(SimpleIndividualEvaluator):
-    def _evaluate_individual(self, individual):
-        return sum(individual.vector)
+class NSGA2BasicTestEvaluator(SimpleIndividualEvaluator):
+	def _evaluate_individual(self, individual):
+		n = len(individual.vector)
+		fit1 = 1 - math.exp(-sum([(x - 1 / math.sqrt(n)) ** 2 for x in individual.vector]))
+		fit2 = 1 - math.exp(-sum([(x + 1 / math.sqrt(n)) ** 2 for x in individual.vector]))
+		return [fit1, fit2]
 ```
