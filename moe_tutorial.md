@@ -28,10 +28,6 @@ Now we can create our experiment.
 ## expirament goal
 in the following expirament we will try to minimize the following objective:
 ![image](https://user-images.githubusercontent.com/63184030/221292171-7e41d3b3-1798-455e-baba-aef995a72124.png)
-![image](https://user-images.githubusercontent.com/62753120/163422945-d433b195-9443-4797-90fb-665e181bec80.png)
-
-
-
 
 ### Initializing the multi-objective evolutionary algorithm
 
@@ -181,3 +177,12 @@ class NSGA2BasicTestEvaluator(SimpleIndividualEvaluator):
 		fit2 = 1 - math.exp(-sum([(x + 1 / math.sqrt(n)) ** 2 for x in individual.vector]))
 		return [fit1, fit2]
 ```
+
+## printing the pareto front 
+ןכ כגדכגכדגכגדכדגכ
+ןככ 
+```python
+	ploter = NSGA2Plot()
+	algo.register('evolution_finished', ploter.print_plots)
+```
+![image](https://user-images.githubusercontent.com/63184030/221371703-64ee131f-8075-435b-bec4-c574f9369b83.png)
