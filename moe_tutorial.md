@@ -120,11 +120,11 @@ Then, we defined the genetic operators to be applied in each generation:
 
 Now that we are done with our Subpopulation, we will finish setting the evolutionary algorithm.
 
-We define our breeder to be the standard simple Breeder (appropriate for the simple case of a single sub-population), and our max number of worker nodes to compute the fitness values is 4.
+We define our breeder to be the standard NSGA2 Breeder , and our max number of worker nodes to compute the fitness values is 4.
 
 ```python
-        breeder=SimpleBreeder(),
-        max_workers=4,
+	breeder=NSGA2Breeder(),
+	max_workers=4,
 ```
 
 ### Termination condition and statistics
