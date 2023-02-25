@@ -178,9 +178,8 @@ class NSGA2BasicTestEvaluator(SimpleIndividualEvaluator):
 		return [fit1, fit2]
 ```
 
-## printing the pareto front 
-ןכ כגדכגכדגכגדכדגכ
-ןככ 
+## printing the Pareto front 
+if your fitness it 2 dimensional i.e you have only two objectives, you can add the following line to print your Pareto front  
 ```python
 	ploter = NSGA2Plot()
 	algo.register('evolution_finished', ploter.print_plots)
