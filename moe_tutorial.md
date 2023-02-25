@@ -184,4 +184,5 @@ if your fitness it 2 dimensional i.e you have only two objectives, you can add t
 	ploter = NSGA2Plot()
 	algo.register('evolution_finished', ploter.print_plots)
 ```
-![image](https://user-images.githubusercontent.com/63184030/221371703-64ee131f-8075-435b-bec4-c574f9369b83.png)
+![image](https://user-images.githubusercontent.com/63184030/221371884-9fc20c7b-1c15-44bc-add5-7e6e8d16584c.png)
+
